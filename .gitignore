@@ -1,0 +1,7 @@
+# Python
+.venv/
+__pycache__/
+
+# Secrets and logs
+.env
+bot.log
