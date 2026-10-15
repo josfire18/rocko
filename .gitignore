@@ -5,3 +5,5 @@ __pycache__/
 # Secrets and logs
 .env
 bot.log
+rocko.db
+rocko.db-*

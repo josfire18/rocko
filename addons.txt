@@ -1,0 +1,6 @@
+# Add-ons this copy of Rocko runs. Install or update them with:
+#   .venv\Scripts\pip install -r addons.txt        (macOS/Linux: .venv/bin/pip ...)
+# then restart the bot. Delete a line (and pip uninstall it) to remove an add-on.
+
+# /clip: video link -> captioned GIF + soundboard sound
+clipkit[rocko] @ git+https://github.com/josfire18/clipkit@v0.2.0

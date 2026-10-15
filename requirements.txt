@@ -1,2 +1,1 @@
 discord.py>=2.5
-clipkit @ git+https://github.com/josfire18/clipkit@v0.1.0
