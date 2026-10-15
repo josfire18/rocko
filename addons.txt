@@ -6,4 +6,4 @@
 clipkit[rocko] @ git+https://github.com/josfire18/clipkit@v0.2.0
 
 # Escape from Tarkov: /price /needed /ammo /goons /traders, news posts, /needs (see its README)
-rocko-tarkov[rocko] @ git+https://github.com/josfire18/rocko-tarkov@v0.1.4
+rocko-tarkov[rocko] @ git+https://github.com/josfire18/rocko-tarkov@v0.1.5
