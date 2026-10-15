@@ -9,6 +9,7 @@ only answers while that's on.
 | Add-on | Commands | Install line for `addons.txt` |
 | --- | --- | --- |
 | [ClipKit](https://github.com/josfire18/clipkit) | `/clip`: video link to captioned GIF + soundboard sound | `clipkit[rocko] @ git+https://github.com/josfire18/clipkit@v0.2.0` |
+| [rocko-tarkov](https://github.com/josfire18/rocko-tarkov) | Escape from Tarkov: `/price`, `/needed`, `/ammo`, `/goons`, `/traders`, news posts, `/needs` | `rocko-tarkov[rocko] @ git+https://github.com/josfire18/rocko-tarkov@v0.1.0` |
 
 Server admins (anyone with *Manage Server*) control add-ons with `/rocko`:
 
