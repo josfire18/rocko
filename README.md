@@ -9,12 +9,13 @@ only answers while that's on.
 | Add-on | Commands | Install line for `addons.txt` |
 | --- | --- | --- |
 | [ClipKit](https://github.com/josfire18/clipkit) | `/clip`: video link to captioned GIF + soundboard sound | `clipkit[rocko] @ git+https://github.com/josfire18/clipkit@v0.2.0` |
-| [rocko-tarkov](https://github.com/josfire18/rocko-tarkov) | Escape from Tarkov: `/price`, `/needed`, `/ammo`, `/goons`, `/traders`, news posts, `/needs` | `rocko-tarkov[rocko] @ git+https://github.com/josfire18/rocko-tarkov@v0.1.6` |
+| [rocko-tarkov](https://github.com/josfire18/rocko-tarkov) | Escape from Tarkov: `/price`, `/needed`, `/ammo`, `/goons`, `/traders`, news posts, `/needs` | `rocko-tarkov[rocko] @ git+https://github.com/josfire18/rocko-tarkov@v0.1.7` |
 
 Server admins (anyone with *Manage Server*) control add-ons with `/rocko`:
 
 | Command | What it does |
 | --- | --- |
+| `/rocko settings` | Everything in one place: every add-on, its commands, and this server's settings |
 | `/rocko addons` | Lists installed add-ons and whether they're on in this server |
 | `/rocko enable <addon>` | Turns an add-on on here; its commands show up right away |
 | `/rocko disable <addon>` | Turns an add-on off here; its commands disappear from this server |
@@ -73,6 +74,9 @@ settings.get(guild_id, "channel")
 settings.guilds_with("channel")          # {guild_id: channel_id} for every server that set it
 settings.unseen("news", [post_ids...])   # new IDs only, remembered across restarts
 ```
+
+To show your settings in `/rocko settings`, give your cog a `rocko_settings(self, guild)` method (plain or
+async) that returns one line per setting. Without it, `/rocko settings` lists what you stored as-is.
 
 For posting to every server that picked a channel, `await bot.broadcast("myaddon", "channel", embed=...)`
 skips servers that turned the add-on off. Use `discord.ext.tasks` loops for anything that polls.
