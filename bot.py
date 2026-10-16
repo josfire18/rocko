@@ -52,6 +52,7 @@ class Rocko(commands.Bot):
         self.addons = {}         # name -> addons.Addon, for every add-on that loaded
         self.skipped = {}        # name -> why it didn't load
         self.command_owner = {}  # top-level command name -> add-on name
+        self.addon_cogs = {}     # add-on name -> the cogs it added
 
     async def setup_hook(self):
         await self.load_extension("core.admin")
@@ -61,6 +62,7 @@ class Rocko(commands.Bot):
                 self.skipped[addon.name] = "turned off in .env (ROCKO_DISABLED)"
                 continue
             before = {cmd.name for cmd in self.tree.get_commands()}
+            cogs_before = set(self.cogs)
             try:
                 await self.load_extension(addon.module)
             except Exception as e:
@@ -71,6 +73,7 @@ class Rocko(commands.Bot):
             for cmd in self.tree.get_commands():
                 if cmd.name not in before:
                     self.command_owner[cmd.name] = addon.name
+            self.addon_cogs[addon.name] = [cog for name, cog in self.cogs.items() if name not in cogs_before]
             self.addons[addon.name] = addon
             log.info("Loaded add-on: %s (%s)", addon.name, addon.source)
 
