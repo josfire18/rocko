@@ -56,6 +56,7 @@ class Rocko(commands.Bot):
 
     async def setup_hook(self):
         await self.load_extension("core.admin")
+        await self.load_extension("core.help")
         disabled = {name.strip() for name in os.environ.get("ROCKO_DISABLED", "").split(",") if name.strip()}
         for addon in addons.discover(HERE / "features"):
             if addon.name in disabled:
