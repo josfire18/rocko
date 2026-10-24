@@ -70,3 +70,21 @@ jobs:
         run: |
           pip install -q semgrep
           semgrep scan --config p/default --config p/secrets --severity ERROR --error --metrics off --quiet
+
+  powershell:
+    name: PowerShell security rules (PSScriptAnalyzer)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Analyze .ps1/.psm1 files (fails on Error-severity findings)
+        shell: pwsh
+        run: |
+          $files = Get-ChildItem -Recurse -Include *.ps1,*.psm1 -File | Where-Object FullName -notmatch '[\\/](node_modules|\.git)[\\/]'
+          if (-not $files) { "No PowerShell files."; exit 0 }
+          Set-PSRepository PSGallery -InstallationPolicy Trusted
+          Install-Module PSScriptAnalyzer -Scope CurrentUser -Force
+          $r = $files | ForEach-Object { Invoke-ScriptAnalyzer -Path $_.FullName -Severity Error,Warning }
+          $r | Sort-Object Severity, ScriptName | Format-Table Severity, RuleName, ScriptName, Line, Message -AutoSize -Wrap | Out-String -Width 220
+          $err = @($r | Where-Object Severity -eq 'Error')
+          "Errors: $($err.Count)  Warnings: $(@($r | Where-Object Severity -eq 'Warning').Count)"
+          if ($err.Count) { exit 1 }
