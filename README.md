@@ -4,12 +4,27 @@ A Discord bot I run for my friends' server. Rocko itself is a small core, and it
 add-ons, so anyone can run their own copy with just the add-ons they want. It runs on my PC, so it
 only answers while that's on.
 
+Out of the box it does things for any game: `/lfg` finds people to play with and pings them when it's
+time, and `/tk` keeps the team kill leaderboard. Add-ons bring the rest, like turning clips into GIFs
+and soundboard sounds, or answering every Escape from Tarkov question your squad has.
+
+## Built in
+
+| Command | What it does |
+| --- | --- |
+| `/lfg game: in_minutes: slots:` | A "who's playing?" post with Join and Leave buttons. Shows the start time in everyone's own time zone, pings the squad when it fills and again when it's time, and can ping a role like @Tarkov |
+| `/tk add killer: victim:` | Logs a team kill (with an optional game and note). `/tk board` is the leaderboard with titles, most team-killed and worst rivalry; `/tk list` is one person's record; `/tk undo` takes back your last entry |
+| `/help` | What this server can use, grouped by add-on, or `/help command:` for one command's options |
+| `/about` | What Rocko is, its add-ons here, uptime and version |
+
+These are add-ons too (`lfg` and `teamkills`, in `features/`), so admins can turn them off per server.
+
 ## Add-ons
 
 | Add-on | Commands | Install line for `addons.txt` |
 | --- | --- | --- |
 | [ClipKit](https://github.com/josfire18/clipkit) | `/clip`: video link to captioned GIF + soundboard sound | `clipkit[rocko] @ git+https://github.com/josfire18/clipkit@v0.2.0` |
-| [rocko-tarkov](https://github.com/josfire18/rocko-tarkov) | Escape from Tarkov: `/price`, `/needed`, `/ammo`, `/goons`, `/traders`, news posts, `/needs` | `rocko-tarkov[rocko] @ git+https://github.com/josfire18/rocko-tarkov@v0.1.7` |
+| [rocko-tarkov](https://github.com/josfire18/rocko-tarkov) | Escape from Tarkov: `/item` cards with price trends and loot tiers, `/barter`, `/craft`, `/quest`, `/map`, `/boss`, `/ammo` with an armor chart, `/key`, `/stim`, `/time`, `/status`, flea price and restock alerts by DM, news posts, and more | `rocko-tarkov[rocko] @ git+https://github.com/josfire18/rocko-tarkov@v0.2.0` |
 
 Server admins (anyone with *Manage Server*) control add-ons with `/rocko`:
 
@@ -81,4 +96,12 @@ async) that returns one line per setting. Without it, `/rocko settings` lists wh
 For posting to every server that picked a channel, `await bot.broadcast("myaddon", "channel", embed=...)`
 skips servers that turned the add-on off. Use `discord.ext.tasks` loops for anything that polls.
 
-For something just for your own copy, a `features/<name>.py` file with `setup(bot)` works too.
+For something small, a `features/<name>.py` file with `setup(bot)` works too. That's how `/lfg` and
+`/tk` ship with Rocko.
+
+## Tests
+
+```
+.venv\Scripts\pip install pytest pytest-asyncio
+.venv\Scripts\python -m pytest
+```
