@@ -1,0 +1,7 @@
+# Direct dependencies, loosely constrained. requirements.txt is compiled from this file
+# and pins every package (direct and transitive) to an exact version, so audits and
+# Dependabot see what is really installed. After editing this file, regenerate with:
+#   pip install pip-tools
+#   pip-compile --strip-extras --no-emit-index-url --output-file=requirements.txt requirements.in
+# (Python 3.12, the version CI uses.)
+discord.py>=2.7.1
