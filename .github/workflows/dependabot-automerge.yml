@@ -17,7 +17,7 @@ permissions: {}
 
 jobs:
   test:
-    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    if: true  # SCRATCH ONLY: validation run
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
@@ -120,7 +120,7 @@ jobs:
 
   automerge:
     needs: test
-    if: needs.test.outputs.merge == 'true'
+    if: false  # SCRATCH ONLY: never merge
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
