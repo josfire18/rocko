@@ -27,6 +27,7 @@ jobs:
       merge: ${{ steps.decide.outputs.merge }}
     steps:
       - id: meta
+        continue-on-error: true  # SCRATCH ONLY: fetch-metadata rejects non-Dependabot authors
         uses: dependabot/fetch-metadata@25dd0e34f4fe68f24cc83900b1fe3fe149efef98 # v3.1.0
       - name: Decide whether this update may merge by itself
         id: decide
